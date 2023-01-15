@@ -5,7 +5,7 @@ dotenv.config();
 
 const client = new MongoClient(process.env.MONGODB_URL);
 const database = client.db("moviesbox");
-const moviesController = database.collection("movies");
+const moviesCollection = database.collection("movies");
 
 class MovieController {
   async getMovies(req, res) {
@@ -23,7 +23,7 @@ class MovieController {
         return sortObj;
       };
 
-      const movies = await moviesController
+      const movies = await moviesCollection
         .find()
         .sort(getSortObject())
         .toArray();
@@ -38,7 +38,7 @@ class MovieController {
   async getMovie(req, res) {
     try {
       if (ObjectId.isValid(req.params.id)) {
-        const movie = await moviesController.findOne({
+        const movie = await moviesCollection.findOne({
           _id: ObjectId(req.params.id),
         });
 
@@ -55,7 +55,7 @@ class MovieController {
   async deleteMovie(req, res) {
     try {
       if (ObjectId.isValid(req.params.id)) {
-        const movie = await moviesController.deleteOne({
+        const movie = await moviesCollection.deleteOne({
           _id: ObjectId(req.params.id),
         });
 
@@ -71,7 +71,7 @@ class MovieController {
 
   async addMovie(req, res) {
     try {
-      const newMovie = await moviesController.insertOne(req.body);
+      const newMovie = await moviesCollection.insertOne(req.body);
 
       res.status(201).send(newMovie);
     } catch (error) {
@@ -82,7 +82,7 @@ class MovieController {
   async updateMovie(req, res) {
     try {
       if (ObjectId.isValid(req.params.id)) {
-        const updatedMovie = await moviesController.updateOne(
+        const updatedMovie = await moviesCollection.updateOne(
           {
             _id: ObjectId(req.params.id),
           },
