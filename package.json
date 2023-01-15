@@ -1,0 +1,21 @@
+{
+  "name": "mongodb-course",
+  "version": "1.0.0",
+  "description": "Links: https://www.youtube.com/playlist?list=PLNkWIWHIRwMFJ-3-gI7GC5JDg1ivbIKNR",
+  "main": "mongodb-server.js",
+  "scripts": {
+    "dev": "nodemon mongodb-server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongodb": "^4.13.0"
+  },
+  "type": "module",
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
